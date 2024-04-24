@@ -1,8 +1,7 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
-import { Console } from "console";
-import { initCoins } from './coins/coins.ts';
+import { initCoins } from "./coins/coins";
 import { compareCards, pickCard, initHigherLowerGame } from "./SimpleCard";
 
 console.log("Script started successfully");
@@ -126,7 +125,6 @@ WA.onInit()
         console.log('Scripting API Extra ready');
     }).catch(e => console.error(e));
 
-}).catch(e => console.error(e));
 
 export { };
 

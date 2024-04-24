@@ -1,5 +1,3 @@
-import { bootstrapExtra } from "@workadventure/scripting-api-extra";
-
 let playerCoins = document.getElementById("coin-count");
 
 // Waiting for the API to be ready
