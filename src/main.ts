@@ -14,7 +14,7 @@ WA.onInit()
 
     
     // Init the coin counter of the player
-    let playerCoins: number = WA.player.state.coins = undefined;
+    WA.player.state.coins = undefined;
 
     WA.ui.website.open({
         url: "./src/hud/inventory.html",
