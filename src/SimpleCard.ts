@@ -63,6 +63,12 @@ function getCard(suitInput: number, valueInput: number) {
     text: values[valueInput] + " of " + suits[suitInput],
     value: valueInput,
     suit: suits[suitInput],
+    img:
+      "/public/images/cards/card-" +
+      suits[suitInput] +
+      "-" +
+      valueInput +
+      ".png",
   };
 }
 
