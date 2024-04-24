@@ -3,6 +3,7 @@
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 import { compareCards, pickCard, initHigherLowerGame } from "./SimpleCard";
 
+
 console.log("Script started successfully");
 
 let coinflip: any = null;
@@ -32,8 +33,24 @@ WA.onInit()
     WA.room.area.onEnter("clock").subscribe(async () => {
       //   Pick a random card
 
+      // coinflip = await WA.ui.website.open({
+      //   url: "./src/coinflip/coinflip.html",
+      //   position: {
+      //     vertical: "top",
+      //     horizontal: "middle",
+      //   },
+      //   size: {
+      //     height: "44vh",
+      //     width: "50vw",
+      //   },
+      //   margin: {
+      //     top: "12vh",
+      //   },
+      //   allowApi: true,
+      // });
+
       coinflip = await WA.ui.website.open({
-        url: "./src/coinflip/coinflip.html",
+        url: "./src/lowerHigher/lowerHigher.html",
         position: {
           vertical: "top",
           horizontal: "middle",
@@ -72,6 +89,7 @@ WA.onInit()
       compareCards(actualValue, nextValue, message);
     });
 
+
     WA.room.area.onLeave("clock").subscribe(async () => {
       WA.chat.close();
       await coinflip.close();
@@ -85,6 +103,25 @@ WA.onInit()
   })
   .catch((e) => console.error(e));
 
+    // Init the coin counter of the player
+   WA.player.state.coins = 50;
+
+    WA.ui.website.open({
+        url: "./src/hud/inventory.html",
+        position: {
+            vertical: "top",
+            horizontal: "right",
+        },
+        size: {
+            height: "30vh", 
+            width: "150px",
+        },
+        allowApi: true,
+    });
+
+    WA.room.area.onEnter('add-coin').subscribe(() => {
+        (WA.player.state.coins as number) += 1;
+    });
 
 
 export { };

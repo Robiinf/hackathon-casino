@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lower Or Higher Game</title>
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="lowerHigher.ts"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-[#1b1b29f2] text-white flex flex-col justify-center items-center gap-y-2 p-4">
+        <h1 class="text-2xl text-center">Lower or Higher</h1>
+        <p class="text-small">Is the next card will be higher or lower??</p>
+        <div class="h-40 bg-[#5e885f] gap-x-8 flex p-2 ">
+            <div class=" h-full border-[#3c573d] border-2 rounded-md p-1  flex justify-center" >
+                <img class="duration-100" id="actual-card-displayer" src="/public/images/cards/card-clubs-1.png">
+            </div>
+            <div class="h-full border-[#3c573d] border-2 rounded-md p-1 flex justify-center">
+                <img class="duration-100"  id="next-card-displayer" src="/public/images/cards/card-back1.png">
+            </div>
+        </div> 
+        <div>
+            <button id="button-higher" class="bg-rose-950 text-rose-400 disabled:opacity-30 border border-rose-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 outline-none duration-300 group">
+                <span class="bg-rose-400 shadow-rose-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+                Higher
+            </button>
+            <button id="button-lower" class="bg-green-950 text-green-400 disabled:opacity-30 border border-green-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 outline-none duration-300 group">
+                <span class="bg-green-400 shadow-green-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+                Lower
+            </button>
+        </div>
+        <p id="result-lower-higher">Result: </p>
+
+        <hr class="border-b border-white w-4/5" />
+        <small class="text-[10px] tracking-tighter">If you win you will Double your bet!! <br/> If you lose nothing will remain!!</small>
+    </div>
+</body>
+</html>
+
+<style>
+    * {
+        font-family: 'Press Start 2P', cursive;
+    }
+</style>
