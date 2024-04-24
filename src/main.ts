@@ -1,8 +1,9 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
+import { Console } from "console";
+import { initCoins } from './coins/coins.ts';
 import { compareCards, pickCard, initHigherLowerGame } from "./SimpleCard";
-
 
 console.log("Script started successfully");
 
@@ -11,6 +12,7 @@ let coinflip: any = null;
 WA.onInit()
   .then(() => {
     initHigherLowerGame();
+    initCoins();
     console.log("Scripting API ready");
     console.log("Player tags: ", WA.player.tags);
 
@@ -104,7 +106,7 @@ WA.onInit()
   .catch((e) => console.error(e));
 
     // Init the coin counter of the player
-   WA.player.state.coins = 50;
+    WA.player.state.coins = 50;
 
     WA.ui.website.open({
         url: "./src/hud/inventory.html",
@@ -119,10 +121,12 @@ WA.onInit()
         allowApi: true,
     });
 
-    WA.room.area.onEnter('add-coin').subscribe(() => {
-        (WA.player.state.coins as number) += 1;
-    });
+    // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
+    bootstrapExtra().then(() => {
+        console.log('Scripting API Extra ready');
+    }).catch(e => console.error(e));
 
+}).catch(e => console.error(e));
 
 export { };
 
