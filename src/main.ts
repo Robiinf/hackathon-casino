@@ -13,7 +13,8 @@ WA.onInit().then(() => {
     console.log('Player tags: ',WA.player.tags)
 
     // Init the coin counter of the player
-   WA.player.state.coins = 50;
+    WA.player.state.coins = 50;
+    let coinSound = WA.sound.loadSound("../public/sounds/coin-sound.mp3");
 
     WA.ui.website.open({
         url: "./src/hud/inventory.html",
@@ -28,7 +29,9 @@ WA.onInit().then(() => {
         allowApi: true,
     });
 
+    
     WA.room.area.onEnter('add-coin').subscribe(() => {
+        coinSound.play();
         WA.player.state.coins += 1;
     });
 
