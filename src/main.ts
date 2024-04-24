@@ -3,6 +3,7 @@
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 import { compareCards, pickCard, initHigherLowerGame } from "./SimpleCard";
 
+
 console.log("Script started successfully");
 
 let coinflip: any = null;
@@ -72,6 +73,7 @@ WA.onInit()
       compareCards(actualValue, nextValue, message);
     });
 
+
     WA.room.area.onLeave("clock").subscribe(async () => {
       WA.chat.close();
       await coinflip.close();
@@ -85,6 +87,25 @@ WA.onInit()
   })
   .catch((e) => console.error(e));
 
+    // Init the coin counter of the player
+   WA.player.state.coins = 50;
+
+    WA.ui.website.open({
+        url: "./src/hud/inventory.html",
+        position: {
+            vertical: "top",
+            horizontal: "right",
+        },
+        size: {
+            height: "30vh", 
+            width: "150px",
+        },
+        allowApi: true,
+    });
+
+    WA.room.area.onEnter('add-coin').subscribe(() => {
+        WA.player.state.coins += 1;
+    });
 
 
 export { };
