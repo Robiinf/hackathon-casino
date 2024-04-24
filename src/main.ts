@@ -31,12 +31,30 @@ WA.onInit()
 
     WA.room.area.onEnter("clock").subscribe(() => {
       //   Pick a random card
+
+      WA.ui.website.open({
+        url: "./src/coinflip/coinflip.html",
+        position: {
+          vertical: "top",
+          horizontal: "middle",
+        },
+        size: {
+          height: "30vh",
+          width: "50vw",
+        },
+        margin: {
+          top: "10vh",
+        },
+        allowApi: true,
+      });
+
       pickCard();
 
       WA.chat.sendChatMessage(
         "Will the next card be higher or lower?",
         "Dealer"
       );
+    });
 
     //  Listen to chat messages to get the user answer
     WA.chat.onChatMessage((message) => {
