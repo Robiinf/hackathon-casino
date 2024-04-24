@@ -104,7 +104,7 @@ WA.onInit()
     });
 
     WA.room.area.onEnter('add-coin').subscribe(() => {
-        WA.player.state.coins += 1;
+        (WA.player.state.coins as number) += 1;
     });
 
 
