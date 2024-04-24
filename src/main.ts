@@ -14,7 +14,7 @@ WA.onInit()
     console.log("Player tags: ", WA.player.tags);
 
     // Init the coin counter of the player
-    WA.player.state.coins = undefined;
+    WA.player.state.coins = 10;
 
     WA.ui.website.open({
       url: "./src/hud/inventory.html",

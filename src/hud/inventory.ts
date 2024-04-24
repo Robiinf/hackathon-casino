@@ -9,4 +9,10 @@ WA.onInit().then(() => {
     }
 }).catch(e => console.error(e))
 
+WA.player.state.onVariableChange("coins").subscribe(() => {
+  if (playerCoins) {
+    playerCoins.innerHTML = ("x " + WA.player.state.coins) as string;
+  }
+});
+
 export {};
