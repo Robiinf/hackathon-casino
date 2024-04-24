@@ -12,6 +12,23 @@ WA.onInit()
     console.log("Scripting API ready");
     console.log("Player tags: ", WA.player.tags);
 
+    
+    // Init the coin counter of the player
+    let playerCoins: number = WA.player.state.coins = undefined;
+
+    WA.ui.website.open({
+        url: "./src/hud/inventory.html",
+        position: {
+            vertical: "top",
+            horizontal: "right",
+        },
+        size: {
+            height: "30vh", 
+            width: "10vw",
+        },
+        allowApi: true,
+    });
+
     WA.room.area.onEnter("clock").subscribe(() => {
       //   Pick a random card
       pickCard();
@@ -20,7 +37,6 @@ WA.onInit()
         "Will the next card be higher or lower?",
         "Dealer"
       );
-    });
 
     //  Listen to chat messages to get the user answer
     WA.chat.onChatMessage((message) => {
@@ -52,4 +68,5 @@ WA.onInit()
 
 
 
-export {};
+export { };
+
