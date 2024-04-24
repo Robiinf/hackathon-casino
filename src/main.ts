@@ -33,8 +33,24 @@ WA.onInit()
     WA.room.area.onEnter("clock").subscribe(async () => {
       //   Pick a random card
 
+      // coinflip = await WA.ui.website.open({
+      //   url: "./src/coinflip/coinflip.html",
+      //   position: {
+      //     vertical: "top",
+      //     horizontal: "middle",
+      //   },
+      //   size: {
+      //     height: "44vh",
+      //     width: "50vw",
+      //   },
+      //   margin: {
+      //     top: "12vh",
+      //   },
+      //   allowApi: true,
+      // });
+
       coinflip = await WA.ui.website.open({
-        url: "./src/coinflip/coinflip.html",
+        url: "./src/lowerHigher/lowerHigher.html",
         position: {
           vertical: "top",
           horizontal: "middle",
