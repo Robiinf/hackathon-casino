@@ -112,7 +112,7 @@
                     0, 0, 0, 0, 2704, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2844, 2848, 2848, 2848, 2848, 2845, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2850, 0, 0, 0, 0, 2851, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2704, 2850, 0, 0, 0, 0, 2851, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2850, 0, 0, 0, 0, 2851, 0,
+                    0, 0, 0, 0, 2727, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2850, 0, 0, 0, 0, 2851, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2850, 0, 0, 0, 0, 2851, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2850, 0, 0, 0, 0, 2851, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2847, 2849, 2849, 2849, 2849, 2846, 0,
@@ -130,6 +130,17 @@
                  "type":"tilelayer",
                  "visible":true,
                  "width":31,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "draworder":"topdown",
+                 "id":65,
+                 "name":"Object Layer 2",
+                 "objects":[],
+                 "opacity":1,
+                 "type":"objectgroup",
+                 "visible":true,
                  "x":0,
                  "y":0
                 }],
@@ -321,6 +332,7 @@
          "y":0
         }, 
         {
+         "class":"variable",
          "draworder":"topdown",
          "id":2,
          "name":"floorLayer",
@@ -448,19 +460,19 @@
                 {
                  "height":32,
                  "id":19,
-                 "name":"from-conference",
+                 "name":"add-coin",
                  "properties":[
                         {
-                         "name":"start",
-                         "type":"bool",
-                         "value":true
+                         "name":"default",
+                         "type":"int",
+                         "value":5
                         }],
                  "rotation":0,
                  "type":"area",
                  "visible":true,
                  "width":32,
-                 "x":64,
-                 "y":544
+                 "x":128.75,
+                 "y":319.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -542,8 +554,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":63,
- "nextobjectid":20,
+ "nextlayerid":67,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -572,7 +584,7 @@
          "value":"src\/main.ts"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.10.2",
+ "tiledversion":"git",
  "tileheight":32,
  "tilesets":[
         {
