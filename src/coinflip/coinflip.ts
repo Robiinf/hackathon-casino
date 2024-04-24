@@ -28,7 +28,6 @@ WA.onInit()
             (WA.player.state.coins as number) -= 1;
           }
         }
-        console.log(WA.player.state.coins);
       }, 1500);
     });
 
@@ -50,7 +49,6 @@ WA.onInit()
             (WA.player.state.coins as number) -= 1;
           }
         }
-        console.log(WA.player.state.coins);
       }, 1500);
     });
   })

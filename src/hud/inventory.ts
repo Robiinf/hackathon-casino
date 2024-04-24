@@ -5,7 +5,6 @@ let playerCoins = document.getElementById("coin-count");
 // Waiting for the API to be ready
 WA.onInit()
   .then(() => {
-    console.log(WA.player.state.coins);
     if (playerCoins) {
       playerCoins.innerHTML = ("x " + (WA.player.state.coins ?? 10)) as string;
     }
