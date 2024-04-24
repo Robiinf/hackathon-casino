@@ -5,13 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coinflip Mini Game</title>
     <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="coinflip.ts"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1></h1>Coinflip Mini Game</h1>
-    <p>Choose heads or tails and flip the coin!</p>
-    <button id="heads">Heads</button>
-    <button id="tails">Tails</button>
-    <p id="result"></p>
-    <script src="coinflip.js"></script>
+    <div class="bg-[#1b1b29f2] text-white flex flex-col justify-center items-center gap-y-2 p-4">
+        <h1 class="text-2xl text-center">Coinflip Mini Game</h1>
+        <img id="coinflip-displayer" src="https://cdn.dribbble.com/users/12524477/screenshots/18860746/media/34c431d2ce3d5d9734c1b8ffac98a698.gif" 
+        class="w-40 h-40" alt="displayer">
+        <p class="text-small">Choose heads or tails and flip the coin!</p>
+
+        <div>
+            <button id="coinflip-heads-button" class="bg-rose-950 text-rose-400 border border-rose-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 outline-none duration-300 group">
+                <span class="bg-rose-400 shadow-rose-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+                Heads
+            </button>
+            <button id="coinflip-tails-button" class="bg-green-950 text-green-400 border border-green-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 outline-none duration-300 group">
+                <span class="bg-green-400 shadow-green-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+                Tails
+            </button>
+        </div>
+        <p id="coinflip-result">Result: </p>
+
+        <hr class="border-b border-white w-4/5" />
+        <small class="text-[10px] tracking-tighter">If you win you will Double your bet!! <br/> If you lose nothing will remain!!</small>
+    </div>
 </body>
 </html>
+
+<style>
+    * {
+        font-family: 'Press Start 2P', cursive;
+    }
+</style>
