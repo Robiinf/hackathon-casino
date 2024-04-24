@@ -22,7 +22,7 @@ WA.onInit().then(() => {
         },
         size: {
             height: "30vh", 
-            width: "10vw",
+            width: "150px",
         },
         allowApi: true,
     });
