@@ -27,7 +27,6 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 index: "./index.html",
-                inventory: "./src/hud/inventory.html",
                 ...getMapsScripts(maps),
             },
         },
