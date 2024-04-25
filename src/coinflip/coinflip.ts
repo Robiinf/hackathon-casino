@@ -11,38 +11,28 @@ WA.onInit()
     tailsButton = document.getElementById("coinflip-tails-button");
 
     headsButton?.addEventListener("click", () => {
-      let answer = coinFlip();
-      displayer.src =
-        "https://cdn.dribbble.com/users/1493264/screenshots/5573460/media/8e8e17f6f50fb501f22630d00e4b238d.gif";
-      result.innerHTML = "Flipping...";
-      setTimeout(() => {
-        if (result) {
-          if (answer === "heads") {
-            result.innerHTML = "You win!";
-            displayer.src = `https://cdn.dribbble.com/users/10800475/screenshots/17561202/media/be1100d24ca04fcb6ed24a4a5ef43b06.gif`;
-            (WA.player.state.coins as number) += 1;
-          } else {
-            result.innerHTML = "You lose!";
-            displayer.src =
-              "https://cdn.dribbble.com/users/12524477/screenshots/18860746/media/34c431d2ce3d5d9734c1b8ffac98a698.gif";
-            (WA.player.state.coins as number) -= 1;
-          }
-        }
-      }, 1500);
+      flip("heads");
     });
 
     tailsButton?.addEventListener("click", () => {
+      flip("tails");
+    });
+
+    function flip(choice: string) {
       let answer = coinFlip();
       displayer.src =
         "https://cdn.dribbble.com/users/1493264/screenshots/5573460/media/8e8e17f6f50fb501f22630d00e4b238d.gif";
       result.innerHTML = "Flipping...";
       setTimeout(() => {
         if (result) {
-          if (answer === "tails") {
+          if (answer === choice) {
             result.innerHTML = "You win!";
             displayer.src = `https://cdn.dribbble.com/users/10800475/screenshots/17561202/media/be1100d24ca04fcb6ed24a4a5ef43b06.gif`;
             (WA.player.state.coins as number) += 1;
           } else {
+            if ((WA.player.state.luck as number) < Math.random() * 100) {
+              flip(choice);
+            }
             result.innerHTML = "You lose!";
             displayer.src =
               "https://cdn.dribbble.com/users/12524477/screenshots/18860746/media/34c431d2ce3d5d9734c1b8ffac98a698.gif";
@@ -50,7 +40,7 @@ WA.onInit()
           }
         }
       }, 1500);
-    });
+    }
   })
   .catch((e) => console.error(e));
 

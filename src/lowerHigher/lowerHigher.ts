@@ -96,6 +96,11 @@ function compareCards(actualCard: any, nextCard: any, guess: string) {
     resultLowerHigher.innerHTML = "You win!";
     (WA.player.state.coins as number) += 1;
   } else {
+    if ((WA.player.state.luck as number) < Math.random() * 100) {
+      pickCard();
+      compareCards(actualCard, WA.player.state.actualCard, guess);
+      return;
+    }
     resultLowerHigher.innerHTML = "You lose!";
     (WA.player.state.coins as number) -= 1;
   }
