@@ -18,6 +18,41 @@ WA.onInit()
 
     // Init the coin counter of the player
     WA.player.state.coins = 10;
+    WA.player.state.luck = 0;
+
+    WA.player.state.drinksConsumed = [];
+
+    WA.ui.website.open({
+      url: "./src/bar/bar.html",
+      position: {
+        vertical: "middle",
+        horizontal: "middle",
+      },
+      size: {
+        height: "80vh",
+        width: "50vh",
+      },
+      margin: {
+        right: "12px",
+      },
+      allowApi: true,
+    });
+
+    WA.ui.website.open({
+      url: "./src/hud/luck.html",
+      position: {
+        vertical: "middle",
+        horizontal: "right",
+      },
+      size: {
+        height: "80vh",
+        width: "40px",
+      },
+      margin: {
+        right: "12px",
+      },
+      allowApi: true,
+    });
 
     WA.ui.website.open({
       url: "./src/hud/inventory.html",
@@ -26,7 +61,7 @@ WA.onInit()
         horizontal: "right",
       },
       size: {
-        height: "30vh",
+        height: "70px",
         width: "150px",
       },
       allowApi: true,
