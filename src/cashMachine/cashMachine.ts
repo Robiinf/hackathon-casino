@@ -5,6 +5,17 @@ let iconHeight = 40;
 let timePerIcon = 100;
 let indexes = [0, 0, 0];
 let iconMap = ['bar', 'bell', 'cherry', 'seven'];
+let balance = WA.player.state.coins;
+
+// Slot Sounds
+let enterSlotSound = WA.sound.loadSound("/public/sounds/slot/slot-enter.wav");
+let slotSpinningSLot = WA.sound.loadSound("/public/sounds/slot/slot-machine-sound.wav");
+let winningSound = WA.sound.loadSound("/public/sounds/slot/slot-win.wav");
+let soundConfig = {
+    volume: 0.5,
+    loop: false,
+};
+
 
 function roll(reel, offset = 0 as number) {
     const delta = (offset + 2) * numberIcon + Math.round(Math.random() * numberIcon); 
@@ -36,27 +47,43 @@ function rollAll() {
             indexes.map((index) => iconMap[index]);
             
             // WIN CONDITION
+            if (indexes[0] === indexes[1]) {
+                balance.innerHTML = "Balance: " + (WA.player.state.coins * 2) + " coins";
+                winningSound.play(soundConfig);
+                console.log("WIN");
+            }
+
             if (indexes[0] === indexes[1] && indexes[1] === indexes[2]) {
-                console.log('WIN WIN WIN');
+                balance.innerHTML = "Balance: " + (WA.player.state.coins * 5) + " coins";
+                winningSound.play(soundConfig);
+                console.log("JACKPOT");
             }
         });
 }
 
 WA.onInit()
 .then(() => {
+    enterSlotSound.play(soundConfig);
     leverUp = document.getElementById('lever-up');
     leverDown = document.getElementById('lever-down');
+    balance = document.getElementById('balance');
+    balance.innerHTML = "Balance: " + WA.player.state.coins + " coins";
 
     leverUp.addEventListener('click', () => {
-        console.log('onClick')
-        leverUp.style.display = 'none';
-        leverDown.style.display = 'block';
-        setTimeout(() => {
-            leverUp.style.display = 'block';
-            leverDown.style.display = 'none';
-        }, 100);
+        if (WA.player.state.coins >= 5) { // Vérifiez si l'utilisateur a au moins 5 pièces de monnaie
+            slotSpinningSLot.play(soundConfig);
+            WA.player.state.coins -= 5; // Soustrayez 5 pièces de monnaie
+            balance.innerHTML = "Balance: " + WA.player.state.coins + " coins"; // Mettez à jour l'affichage du solde
+            leverUp.style.display = 'none';
+            leverDown.style.display = 'block';
+            setTimeout(() => {
+                leverUp.style.display = 'block';
+                leverDown.style.display = 'none';
+            }, 100);
 
-        rollAll();
+            rollAll();
+        } else {
+            console.log("Not enough coins to play."); // Si l'utilisateur n'a pas assez de pièces de monnaie
+        }
     });
-})
-.catch((e) => console.error(e));
+}).catch((e) => console.error(e));

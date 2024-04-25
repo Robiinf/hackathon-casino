@@ -13,16 +13,17 @@
 </head>
 <body>
     <div class="flex bg-[#1b1b29f2] text-white flex flex-col justify-center items-center gap-y-5 p-4">
-        <h1 class="text-2xl text-center">Slot Machine</h1>
+        <h1 class="text-lg text-center">Welcome to the Slot Machine! <span class="italic text-green-500">(5 coins per spin)</span></h1>
+        <span id="balance" class="block underline text-yellow-500"></span>
         <div class="slots">
             <div class="relative flex w-96 h-96">
                 <img src="/public/images/cashMachine/slot-machine.png"/>
                 <img id="lever-up" class="absolute bottom-1" src="/public/images/cashMachine/lever-up.png"/>
                 <img id="lever-down" class="absolute bottom-0 hidden" src="/public/images/cashMachine/lever-down.png"/>
             </div>
-            <div class="absolute reel top-56 left-[203px] w-[50px] h-[125px] overflow-hidden gap-y-3"></div>
-            <div class="absolute reel top-56 left-[265px] w-[50px] h-[125px]"></div> 
-            <div class="absolute reel top-56 left-[326px] w-[50px] h-[125px]"></div>
+            <div class="absolute reel top-[286px] left-[203px] w-[50px] h-[132px] overflow-hidden gap-y-3"></div>
+            <div class="absolute reel top-[286px] left-[265px] w-[50px] h-[132px]"></div> 
+            <div class="absolute reel top-[286px] left-[326px] w-[50px] h-[132px]"></div>
         </div>
     </div>
 </body>
