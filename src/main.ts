@@ -2,6 +2,7 @@
 
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 import { initCoins } from "./coins/coins";
+import { UIWebsite } from "@workadventure/iframe-api-typings";
 
 console.log("Script started successfully");
 
@@ -65,6 +66,28 @@ WA.onInit()
         width: "150px",
       },
       allowApi: true,
+    });
+
+    let cashMachine: UIWebsite | undefined;
+    WA.room.area.onEnter("cash-machine").subscribe(async () => {
+      cashMachine = await WA.ui.website.open({
+        url: "./src/cashMachine/cashMachine.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "80vh",
+          width: "80vh",
+        },
+        margin: {
+          top: "12vh",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("cash-machine").subscribe(async () => {
+        await cashMachine?.close();
+      });
     });
 
     WA.room.area.onEnter("clock").subscribe(async () => {
