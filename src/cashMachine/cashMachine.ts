@@ -19,64 +19,7 @@ let soundConfig = {
   loop: false,
 };
 
-function roll(reel: any, offset = 0 as number) {
-  const delta =
-    (offset + 2) * numberIcon + Math.round(Math.random() * numberIcon);
-  const style = getComputedStyle(reel),
-    backgroundPositionY = parseFloat(style["background-position-y" as any]),
-    targetBackgroundPositionY = backgroundPositionY + delta * iconHeight,
-    normTargetBackgroundPositionY =
-      targetBackgroundPositionY % (numberIcon * iconHeight);
 
-  return new Promise((resolve) => {
-    reel.style.transition = `background-position-y  ${
-      8 + delta * timePerIcon
-    }ms ease-out`;
-    reel.style.backgroundPositionY = `${
-      backgroundPositionY + delta * iconHeight
-    }px`;
-
-    setTimeout(() => {
-      reel.style.transition = "none";
-      reel.style.backgroundPositionY = `${normTargetBackgroundPositionY}px`;
-      resolve(delta % numberIcon);
-    }, 3 + delta * timePerIcon);
-  });
-}
-
-function rollAll() {
-  const reelsList: any = document.querySelectorAll(".slots .reel");
-
-  Promise.all([...reelsList].map((reel, i) => roll(reel, i))).then((deltas) => {
-    deltas.forEach(
-      (delta: any, i) => (indexes[i] = (indexes[i] + delta) % numberIcon)
-    );
-    indexes.map((index) => iconMap[index]);
-
-    // WIN CONDITION
-    if (
-      indexes[0] === indexes[1] ||
-      indexes[1] === indexes[2] ||
-      indexes[0] === indexes[2]
-    ) {
-      balance.innerHTML =
-        "Balance: " + (WA.player.state.coins as number) * 2 + " coins";
-      winningSound.play(soundConfig);
-      console.log("WIN");
-    }
-
-    if (indexes[0] === indexes[1] && indexes[1] === indexes[2]) {
-      balance.innerHTML =
-        "Balance: " + (WA.player.state.coins as number) * 5 + " coins";
-      winningSound.play(soundConfig);
-      console.log("JACKPOT");
-    }
-
-    if (WA.player.state.coins == 0) {
-      noCoinMachine.innerHTML = "You don't have enough coins to play";
-    }
-  });
-}
 
 WA.onInit()
   .then(() => {
@@ -109,6 +52,69 @@ WA.onInit()
           console.log("Not enough coins to play."); // Si l'utilisateur n'a pas assez de pièces de monnaie
         }
       });
+    }
+
+    function roll(reel: any, offset = 0 as number) {
+      const delta =
+        (offset + 2) * numberIcon + Math.round(Math.random() * numberIcon);
+      const style = getComputedStyle(reel),
+        backgroundPositionY = parseFloat(style["background-position-y" as any]),
+        targetBackgroundPositionY = backgroundPositionY + delta * iconHeight,
+        normTargetBackgroundPositionY =
+          targetBackgroundPositionY % (numberIcon * iconHeight);
+
+      return new Promise((resolve) => {
+        reel.style.transition = `background-position-y  ${
+          8 + delta * timePerIcon
+        }ms ease-out`;
+        reel.style.backgroundPositionY = `${
+          backgroundPositionY + delta * iconHeight
+        }px`;
+
+        setTimeout(() => {
+          reel.style.transition = "none";
+          reel.style.backgroundPositionY = `${normTargetBackgroundPositionY}px`;
+          resolve(delta % numberIcon);
+        }, 3 + delta * timePerIcon);
+      });
+    }
+
+    function rollAll() {
+      const reelsList: any = document.querySelectorAll(".slots .reel");
+
+      Promise.all([...reelsList].map((reel, i) => roll(reel, i))).then(
+        (deltas) => {
+          deltas.forEach(
+            (delta: any, i) => (indexes[i] = (indexes[i] + delta) % numberIcon)
+          );
+          indexes.map((index) => iconMap[index]);
+
+          // WIN CONDITION
+          if (
+            indexes[0] === indexes[1] ||
+            indexes[1] === indexes[2] ||
+            indexes[0] === indexes[2]
+          ) {
+            (WA.player.state.coins as number) += 10;
+            balance.innerHTML =
+              "Balance: " + (WA.player.state.coins as number) + " coins";
+            winningSound.play(soundConfig);
+            console.log("WIN");
+          }
+
+          if (indexes[0] === indexes[1] && indexes[1] === indexes[2]) {
+            (WA.player.state.coins as number) += 25;
+            balance.innerHTML =
+              "Balance: " + (WA.player.state.coins as number) + " coins";
+            winningSound.play(soundConfig);
+            console.log("JACKPOT");
+          }
+
+          if (WA.player.state.coins == 0) {
+            noCoinMachine.innerHTML = "You don't have enough coins to play";
+          }
+        }
+      );
     }
   })
   .catch((e) => console.error(e));
