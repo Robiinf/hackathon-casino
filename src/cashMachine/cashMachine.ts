@@ -45,7 +45,7 @@ function roll(reel: any, offset = 0 as number) {
 }
 
 function rollAll() {
-  const reelsList: any = document.querySelectorAll(".slots > .reel");
+  const reelsList: any = document.querySelectorAll(".slots .reel");
 
   Promise.all([...reelsList].map((reel, i) => roll(reel, i))).then((deltas) => {
     deltas.forEach(
@@ -67,6 +67,10 @@ function rollAll() {
       winningSound.play(soundConfig);
       console.log("JACKPOT");
     }
+
+    if (WA.player.state.coins == 0) {
+      noCoinMachine.innerHTML = "You don't have enough coins to play";
+    }
   });
 }
 
@@ -74,33 +78,33 @@ WA.onInit()
   .then(() => {
     leverUp = document.getElementById("lever-up");
     leverDown = document.getElementById("lever-down");
-      if (WA.player.state.coins == 0 && noCoinMachine != null) {
-        noCoinMachine.innerHTML = "You don't have enough coins to play";
-      } else {
-        enterSlotSound.play(soundConfig);
-        balance = document.getElementById("balance");
-        balance.innerHTML = "Balance: " + WA.player.state.coins + " coins";
+    if (WA.player.state.coins == 0 && noCoinMachine != null) {
+      noCoinMachine.innerHTML = "You don't have enough coins to play";
+    } else {
+      enterSlotSound.play(soundConfig);
+      balance = document.getElementById("balance");
+      balance.innerHTML = "Balance: " + WA.player.state.coins + " coins";
 
-        console.log("Lever up: ", leverUp);
-        leverUp.addEventListener("click", () => {
-          console.log("Lever clicked");
-          if ((WA.player.state.coins as number) >= 5) {
-            // Vérifiez si l'utilisateur a au moins 5 pièces de monnaie
-            slotSpinningSLot.play(soundConfig);
-            (WA.player.state.coins as number) -= 5; // Soustrayez 5 pièces de monnaie
-            balance.innerHTML = "Balance: " + WA.player.state.coins + " coins"; // Mettez à jour l'affichage du solde
-            leverUp.style.display = "none";
-            leverDown.style.display = "block";
-            setTimeout(() => {
-              leverUp.style.display = "block";
-              leverDown.style.display = "none";
-            }, 100);
+      leverUp.addEventListener("click", () => {
+        if ((WA.player.state.coins as number) >= 5) {
+          // Vérifiez si l'utilisateur a au moins 5 pièces de monnaie
+          slotSpinningSLot.play(soundConfig);
+          (WA.player.state.coins as number) -= 5; // Soustrayez 5 pièces de monnaie
+          balance.innerHTML = "Balance: " + WA.player.state.coins + " coins"; // Mettez à jour l'affichage du solde
+          leverUp.style.display = "none";
+          leverDown.style.display = "block";
+          setTimeout(() => {
+            leverUp.style.display = "block";
+            leverDown.style.display = "none";
+          }, 100);
 
-            rollAll();
-          } else {
-            console.log("Not enough coins to play."); // Si l'utilisateur n'a pas assez de pièces de monnaie
-          }
-        });
-      }
+          rollAll();
+        } else {
+          noCoinMachine.innerHTML = "You don't have enough coins to play";
+          balance.innerHTML = "";
+          console.log("Not enough coins to play."); // Si l'utilisateur n'a pas assez de pièces de monnaie
+        }
+      });
+    }
   })
   .catch((e) => console.error(e));
