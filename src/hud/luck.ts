@@ -10,7 +10,6 @@ WA.onInit()
 
 WA.player.state.onVariableChange("luck").subscribe(() => {
   if (luck) {
-    console.log(luck);
     if ((WA.player.state.luck as number) > 100) {
       WA.player.state.luck = 100;
     }

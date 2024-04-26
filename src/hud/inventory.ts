@@ -1,4 +1,10 @@
 let playerCoins = document.getElementById("coin-count");
+let bankruptSound = WA.sound.loadSound("/public/sounds/bankrupt.mp3");
+let bankruptSoundSetting = {
+  volume: 0.5,
+  loop: false,
+};
+
 
 // Waiting for the API to be ready
 WA.onInit()
@@ -10,9 +16,12 @@ WA.onInit()
   .catch((e) => console.error(e));
 
 WA.player.state.onVariableChange("coins").subscribe(() => {
-  if (playerCoins) {
     playerCoins.innerHTML = ("x " + WA.player.state.coins) as string;
-  }
+
+    // If player has 0 coins, play bankrupt sound
+    if (WA.player.state.coins === 0) {
+      bankruptSound.play(bankruptSoundSetting);
+    }
 });
 
 export {};

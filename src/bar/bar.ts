@@ -34,6 +34,13 @@ let marcellinDrinks = null;
 let servalDrinks = null;
 let marquesDrinks = null;
 
+let drinkingSound = WA.sound.loadSound("/public/sounds/bar/drinking.wav");
+let burpSound = WA.sound.loadSound("/public/sounds/bar/burp.mp3");
+let drinkingSoundSetting = {
+  volume: 0.5,
+  loop: false,
+};
+
 WA.onInit()
   .then(() => {
     morinDrinks = document.getElementById("morinDrink");
@@ -47,8 +54,14 @@ WA.onInit()
           DRINKS.morinDrink.price,
           DRINKS.morinDrink.duration,
           DRINKS.morinDrink.luck
-        );
+          );
+          drinkingSound.play(drinkingSoundSetting);
         checkGold();
+        if (Math.random() < 0.5) {
+          setTimeout(() => {
+            burpSound.play(drinkingSoundSetting);
+          }, 1000); // Délai avant le son de burp, 1000 millisecondes = 1 seconde
+        }
       }
     });
 
@@ -60,6 +73,12 @@ WA.onInit()
           DRINKS.marcellinDrink.luck
         );
         checkGold();
+        drinkingSound.play(drinkingSoundSetting);
+        if (Math.random() < 0.5) {
+          setTimeout(() => {
+            burpSound.play(drinkingSoundSetting);
+          }, 1000); // Délai avant le son de burp, 1000 millisecondes = 1 seconde
+        }
       }
     });
 
@@ -71,6 +90,12 @@ WA.onInit()
           DRINKS.servalDrink.luck
         );
         checkGold();
+        drinkingSound.play(drinkingSoundSetting);
+        if (Math.random() < 0.5) {
+          setTimeout(() => {
+            burpSound.play(drinkingSoundSetting);
+          }, 1000); // Délai avant le son de burp, 1000 millisecondes = 1 seconde
+        }
       }
     });
 
@@ -82,6 +107,12 @@ WA.onInit()
           DRINKS.marquesDrink.luck
         );
         checkGold();
+        drinkingSound.play(drinkingSoundSetting);
+        if (Math.random() < 0.5) {
+          setTimeout(() => {
+            burpSound.play(drinkingSoundSetting);
+          }, 1000); // Délai avant le son de burp, 1000 millisecondes = 1 seconde
+        }
       }
     });
 
