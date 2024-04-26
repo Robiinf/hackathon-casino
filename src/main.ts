@@ -22,21 +22,21 @@ WA.onInit()
 
     WA.player.state.drinksConsumed = [];
 
-    WA.ui.website.open({
-      url: "./src/bar/bar.html",
-      position: {
-        vertical: "middle",
-        horizontal: "middle",
-      },
-      size: {
-        height: "80vh",
-        width: "50vh",
-      },
-      margin: {
-        right: "12px",
-      },
-      allowApi: true,
-    });
+    // WA.ui.website.open({
+    //   url: "./src/bar/bar.html",
+    //   position: {
+    //     vertical: "middle",
+    //     horizontal: "middle",
+    //   },
+    //   size: {
+    //     height: "80vh",
+    //     width: "50vh",
+    //   },
+    //   margin: {
+    //     right: "12px",
+    //   },
+    //   allowApi: true,
+    // });
 
     WA.ui.website.open({
       url: "./src/hud/luck.html",
