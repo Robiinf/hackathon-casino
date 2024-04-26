@@ -29,9 +29,9 @@ function roll(reel: any, offset = 0 as number) {
       targetBackgroundPositionY % (numberIcon * iconHeight);
 
   return new Promise((resolve) => {
-    reel.style.transition = `background-position-y ${
+    reel.style.transition = `background-position-y  ${
       8 + delta * timePerIcon
-    }ms`;
+    }ms ease-out`;
     reel.style.backgroundPositionY = `${
       backgroundPositionY + delta * iconHeight
     }px`;
