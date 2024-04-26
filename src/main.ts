@@ -41,29 +41,6 @@ WA.onInit()
 
     WA.player.state.drinksConsumed = [];
 
-    // Bar
-    let bar: UIWebsite | undefined;
-    WA.room.area.onEnter("bar").subscribe(async () => {
-      bar = await WA.ui.website.open({
-        url: "./src/bar/bar.html",
-        position: {
-          vertical: "middle",
-          horizontal: "middle",
-        },
-        size: {
-          height: "80vh",
-          width: "90vh",
-        },
-        margin: {
-          right: "12px",
-        },
-        allowApi: true,
-      });
-      WA.room.area.onLeave("bar").subscribe(async () => {
-        await bar?.close();
-      });
-    });
-
     // Luck Bar
     WA.ui.website.open({
       url: "./src/hud/luck.html",
@@ -271,6 +248,29 @@ WA.onInit()
       });
     });
 
+    // Bar
+    let bar: UIWebsite | undefined;
+    WA.room.area.onEnter("bar").subscribe(async () => {
+      bar = await WA.ui.website.open({
+        url: "./src/bar/bar.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "60vh",
+          width: "50vh",
+        },
+        margin: {
+          right: "12px",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("bar").subscribe(async () => {
+        await bar?.close();
+      });
+    });
+
     bootstrapExtra()
       .then(() => {
         console.log("Scripting API  Extra ready");
@@ -280,7 +280,7 @@ WA.onInit()
   .catch((e) => console.error(e));
 
 // Init the coin counter of the player
-WA.player.state.coins = 50;
+// WA.player.state.coins = 50;
 
 // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
 bootstrapExtra()

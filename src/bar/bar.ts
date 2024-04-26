@@ -29,10 +29,10 @@ const DRINKS = {
   },
 };
 
-let morinDrinks = null;
-let marcellinDrinks = null;
-let servalDrinks = null;
-let marquesDrinks = null;
+let morinDrinks: any = null;
+let marcellinDrinks: any = null;
+let servalDrinks: any = null;
+let marquesDrinks: any = null;
 
 let enterBar = WA.sound.loadSound("/public/sounds/bar/enterBar.mp3");
 let drinkingSound = WA.sound.loadSound("/public/sounds/bar/drinking.wav");
