@@ -5,6 +5,12 @@ let resultLowerHigher: any = null;
 let higherButton: any = null;
 let lowerButton: any = null;
 
+let cardFlip = WA.sound.loadSound("/public/sounds/lowerHigher/card-flip.mp3");
+let cardFlipSoundSetting = {
+  volume: 0.5,
+  loop: false,
+};
+
 WA.onInit()
   .then(() => {
     actualCardDisplayer = document.getElementById("actual-card-displayer");
@@ -19,6 +25,7 @@ WA.onInit()
     actualCardDisplayer.src = (WA.state.actualCard as any).img;
 
     higherButton?.addEventListener("click", () => {
+      cardFlip.play(cardFlipSoundSetting);
       const actualCard = WA.state.actualCard;
       pickCard();
       compareCards(actualCard, WA.state.actualCard, "higher");
@@ -37,6 +44,7 @@ WA.onInit()
     });
 
     lowerButton?.addEventListener("click", () => {
+      cardFlip.play(cardFlipSoundSetting);
       const actualCard = WA.state.actualCard;
       pickCard();
       compareCards(actualCard, WA.state.actualCard, "lower");
