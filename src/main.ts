@@ -1,9 +1,7 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
-import { Console } from "console";
-import { initCoins } from './coins/coins.ts';
-import { compareCards, pickCard, initHigherLowerGame } from "./SimpleCard";
+import { initCoins } from "./coins/coins";
 
 console.log("Script started successfully");
 
@@ -11,13 +9,50 @@ let coinflip: any = null;
 // Waiting for the API to be ready
 WA.onInit()
   .then(() => {
-    initHigherLowerGame();
     initCoins();
     console.log("Scripting API ready");
     console.log("Player tags: ", WA.player.tags);
 
+    WA.state.remainCard = [];
+    WA.state.actualCard = null;
+
     // Init the coin counter of the player
     WA.player.state.coins = 10;
+    WA.player.state.luck = 0;
+
+    WA.player.state.drinksConsumed = [];
+
+    WA.ui.website.open({
+      url: "./src/bar/bar.html",
+      position: {
+        vertical: "middle",
+        horizontal: "middle",
+      },
+      size: {
+        height: "80vh",
+        width: "50vh",
+      },
+      margin: {
+        right: "12px",
+      },
+      allowApi: true,
+    });
+
+    WA.ui.website.open({
+      url: "./src/hud/luck.html",
+      position: {
+        vertical: "middle",
+        horizontal: "right",
+      },
+      size: {
+        height: "80vh",
+        width: "40px",
+      },
+      margin: {
+        right: "12px",
+      },
+      allowApi: true,
+    });
 
     WA.ui.website.open({
       url: "./src/hud/inventory.html",
@@ -26,7 +61,7 @@ WA.onInit()
         horizontal: "right",
       },
       size: {
-        height: "30vh",
+        height: "70px",
         width: "150px",
       },
       allowApi: true,
@@ -66,31 +101,7 @@ WA.onInit()
         },
         allowApi: true,
       });
-
-      // pickCard();
-
-      // WA.chat.sendChatMessage(
-      //   "Will the next card be higher or lower?",
-      //   "Dealer"
-      // );
     });
-
-    //  Listen to chat messages to get the user answer
-    WA.chat.onChatMessage((message) => {
-      if (message !== "higher" && message !== "lower") {
-        WA.chat.sendChatMessage("Please enter higher or lower", "Dealer");
-        return;
-      }
-
-      const actualValue = WA.state.actualCard as any;
-
-      pickCard();
-
-      const nextValue = WA.state.actualCard as any;
-
-      compareCards(actualValue, nextValue, message);
-    });
-
 
     WA.room.area.onLeave("clock").subscribe(async () => {
       WA.chat.close();
@@ -126,7 +137,6 @@ WA.onInit()
         console.log('Scripting API Extra ready');
     }).catch(e => console.error(e));
 
-}).catch(e => console.error(e));
 
 export { };
 
