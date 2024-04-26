@@ -34,15 +34,17 @@ let marcellinDrinks = null;
 let servalDrinks = null;
 let marquesDrinks = null;
 
+let enterBar = WA.sound.loadSound("/public/sounds/bar/enterBar.mp3");
 let drinkingSound = WA.sound.loadSound("/public/sounds/bar/drinking.wav");
 let burpSound = WA.sound.loadSound("/public/sounds/bar/burp.mp3");
-let drinkingSoundSetting = {
+let barSoundSetting = {
   volume: 0.5,
   loop: false,
 };
 
 WA.onInit()
   .then(() => {
+    enterBar.play(barSoundSetting);
     morinDrinks = document.getElementById("morinDrink");
     marcellinDrinks = document.getElementById("marcellinDrink");
     servalDrinks = document.getElementById("servalDrink");
@@ -55,11 +57,11 @@ WA.onInit()
           DRINKS.morinDrink.duration,
           DRINKS.morinDrink.luck
           );
-          drinkingSound.play(drinkingSoundSetting);
+          drinkingSound.play(barSoundSetting);
         checkGold();
         if (Math.random() < 0.5) {
           setTimeout(() => {
-            burpSound.play(drinkingSoundSetting);
+            burpSound.play(barSoundSetting);
           }, 1000); // Délai avant le son de burp, 1000 millisecondes = 1 seconde
         }
       }
@@ -73,10 +75,10 @@ WA.onInit()
           DRINKS.marcellinDrink.luck
         );
         checkGold();
-        drinkingSound.play(drinkingSoundSetting);
+        drinkingSound.play(barSoundSetting);
         if (Math.random() < 0.5) {
           setTimeout(() => {
-            burpSound.play(drinkingSoundSetting);
+            burpSound.play(barSoundSetting);
           }, 1000); // Délai avant le son de burp, 1000 millisecondes = 1 seconde
         }
       }
@@ -90,10 +92,10 @@ WA.onInit()
           DRINKS.servalDrink.luck
         );
         checkGold();
-        drinkingSound.play(drinkingSoundSetting);
+        drinkingSound.play(barSoundSetting);
         if (Math.random() < 0.5) {
           setTimeout(() => {
-            burpSound.play(drinkingSoundSetting);
+            burpSound.play(barSoundSetting);
           }, 1000); // Délai avant le son de burp, 1000 millisecondes = 1 seconde
         }
       }
@@ -107,10 +109,10 @@ WA.onInit()
           DRINKS.marquesDrink.luck
         );
         checkGold();
-        drinkingSound.play(drinkingSoundSetting);
+        drinkingSound.play(barSoundSetting);
         if (Math.random() < 0.5) {
           setTimeout(() => {
-            burpSound.play(drinkingSoundSetting);
+            burpSound.play(barSoundSetting);
           }, 1000); // Délai avant le son de burp, 1000 millisecondes = 1 seconde
         }
       }
