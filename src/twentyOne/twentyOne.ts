@@ -9,8 +9,18 @@ let score: any = null;
 let dealerScore: any = null;
 let statusDisplayer: any = null;
 
+let shuffleCard = WA.sound.loadSound("/public/sounds/blackjack/blackjack-shuffle.mp3");
+let cardFlip = WA.sound.loadSound("/public/sounds/lowerHigher/card-flip.mp3");
+let staySound = WA.sound.loadSound("/public/sounds/blackjack/check-sound.mp3");
+
+let blackjackSoundSetting = {
+  volume: 0.5,
+  loop: false,
+};
+
 WA.onInit()
   .then(() => {
+    shuffleCard.play(blackjackSoundSetting);
     startButton = document.getElementById("button-start");
     hitButton = document.getElementById("button-hit");
     standButton = document.getElementById("button-stand");
@@ -56,6 +66,7 @@ WA.onInit()
     }
 
     const onStandClick = () => {
+      staySound.play(blackjackSoundSetting);
       stand();
       while (WA.player.state.dealerStatus === "playing") {
         console.log("Dealer draws card");
@@ -67,6 +78,7 @@ WA.onInit()
     };
 
     function hit() {
+      cardFlip.play(blackjackSoundSetting);
       (WA.player.state.userCards as any[]).push(pickCard21());
       showUserCard();
       calculateScores();

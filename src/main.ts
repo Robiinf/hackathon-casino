@@ -41,26 +41,9 @@ WA.onInit()
 
     WA.player.state.drinksConsumed = [];
 
-    
-    //WA.ui.website.open({
-    //  url: "./src/twentyOne/twentyOne.html",
-    //  position: {
-    //    vertical: "middle",
-    //    horizontal: "middle",
-    //  },
-    //  size: {
-    //    height: "80vh",
-    //    width: "50vh",
-    //  },
-    //  margin: {
-    //    right: "12px",
-    //  },
-    //  allowApi: true,
-    //});
-
     // Bar
     let bar: UIWebsite | undefined;
-    WA.room.area.onEnter("bar").subscribe(async() => {
+    WA.room.area.onEnter("bar").subscribe(async () => {
       bar = await WA.ui.website.open({
         url: "./src/bar/bar.html",
         position: {
@@ -266,8 +249,26 @@ WA.onInit()
     });
 
     // Blackjack
+    let blackjack: UIWebsite | undefined;
     WA.room.area.onEnter("blackjack").subscribe(async () => {
-      console.log("Blackjack");
+      blackjack = await WA.ui.website.open({
+        url: "./src/twentyOne/twentyOne.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "80vh",
+          width: "50vh",
+        },
+        margin: {
+          right: "12px",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("blackjack").subscribe(async () => {
+        await blackjack?.close();
+      });
     });
 
     bootstrapExtra()
@@ -288,5 +289,4 @@ bootstrapExtra()
   })
   .catch((e) => console.error(e));
 
-export { };
-
+export {};
