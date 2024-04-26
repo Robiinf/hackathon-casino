@@ -21,7 +21,7 @@ WA.onInit()
     headsButton = document.getElementById("coinflip-heads-button");
     tailsButton = document.getElementById("coinflip-tails-button");
 
-    if (WA.player.state.coins == 0) {
+    if (WA.player.state.coins == 0 && noCoinFlip) {
       noCoinFlip.innerHTML = "You don't have enough coins to play";
       headsButton.disabled = true;
       tailsButton.disabled = true;
