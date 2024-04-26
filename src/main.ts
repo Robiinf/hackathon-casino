@@ -276,7 +276,7 @@ WA.onInit()
 
       await new Promise((r) => setTimeout(r, 3000));
 
-      //resultPopUp?.close();
+      resultPopUp?.close();
 
       WA.controls.restorePlayerControls();
       WA.nav.goToRoom("#start");

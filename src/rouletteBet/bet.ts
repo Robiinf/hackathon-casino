@@ -7,6 +7,10 @@ let maxBet = document.getElementById("maxBet");
 // Waiting for the API to be ready
 WA.onInit()
   .then(() => {
+    if (WA.player.state.betAmount > WA.player.state.coins) {
+      WA.player.state.betAmount = WA.player.state.coins;
+    }
+
     if (betCoins) {
       betCoins.innerHTML = ("x " +
         (WA.player.state.betAmount as number)) as string;
@@ -37,6 +41,9 @@ WA.onInit()
     });
 
     minBet?.addEventListener("click", () => {
+      if (WA.player.state.coins < 1) {
+        return;
+      }
       WA.player.state.betAmount = 1;
     });
 
