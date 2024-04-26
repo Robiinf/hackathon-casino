@@ -1,5 +1,6 @@
 let resultDescription = document.getElementById("result_desc");
 let result = document.getElementById("result");
+let rouletteRoll = document.getElementById("roulette_roll");
 
 const red_number = [
   2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36,
@@ -16,8 +17,9 @@ WA.onInit()
     playerBet = playerBet.toUpperCase();
     let playerBetAmount = WA.player.state.loadVariable("betAmount");
 
-    if (resultDescription) {
+    if (resultDescription && rouletteRoll) {
       resultDescription.innerHTML = `You bet ${playerBetAmount} coins on ${playerBet}`;
+      rouletteRoll.innerHTML = `The roulette rolled : ${rouletteResult}`;
     }
 
     function changeBgToWin() {
