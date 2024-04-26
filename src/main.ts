@@ -29,6 +29,9 @@ WA.onInit()
     console.log("Scripting API ready");
     console.log("Player tags: ", WA.player.tags);
 
+    WA.player.state.dealerCards = [];
+    WA.player.state.dealerCardScore = 0;
+
     WA.state.remainCard = [];
     WA.state.actualCard = null;
 
@@ -37,6 +40,23 @@ WA.onInit()
     WA.player.state.luck = 0;
 
     WA.player.state.drinksConsumed = [];
+
+    
+    //WA.ui.website.open({
+    //  url: "./src/twentyOne/twentyOne.html",
+    //  position: {
+    //    vertical: "middle",
+    //    horizontal: "middle",
+    //  },
+    //  size: {
+    //    height: "80vh",
+    //    width: "50vh",
+    //  },
+    //  margin: {
+    //    right: "12px",
+    //  },
+    //  allowApi: true,
+    //});
 
     // Bar
     let bar: UIWebsite | undefined;

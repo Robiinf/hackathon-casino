@@ -1,18 +1,10 @@
 // Waiting for the API to be ready
 
 let luck: any = null;
-let luckLogo: any = null;
 
 WA.onInit()
   .then(() => {
     luck = document.getElementById("luck-count");
-    luckLogo = document.getElementById("luck-logo");
-
-    if (luckLogo) {
-      luckLogo.addEventListener("click", () => {
-        (WA.player.state.luck as number) += 10;
-      });
-    }
   })
   .catch((e) => console.error(e));
 
