@@ -54,7 +54,11 @@ function rollAll() {
     indexes.map((index) => iconMap[index]);
 
     // WIN CONDITION
-    if (indexes[0] === indexes[1]) {
+    if (
+      indexes[0] === indexes[1] ||
+      indexes[1] === indexes[2] ||
+      indexes[0] === indexes[2]
+    ) {
       balance.innerHTML =
         "Balance: " + (WA.player.state.coins as number) * 2 + " coins";
       winningSound.play(soundConfig);
