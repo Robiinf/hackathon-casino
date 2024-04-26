@@ -3,7 +3,7 @@ let result: any = null;
 let headsButton: any = null;
 let tailsButton: any = null;
 
-let noCoin = document.getElementById("no-coin");
+let noCoinFlip = document.getElementById("no-coin");
 let coinFlipSound = WA.sound.loadSound("/public/sounds/coinflip/coin-flip.mp3");
 let congratsSound = WA.sound.loadSound("/public/sounds/coinflip/congrats.mp3");
 let loosingSound = WA.sound.loadSound("/public/sounds/loosing.wav");
@@ -21,8 +21,8 @@ WA.onInit()
     headsButton = document.getElementById("coinflip-heads-button");
     tailsButton = document.getElementById("coinflip-tails-button");
 
-    if(WA.player.state.coins == 0) {
-      noCoin.innerHTML = "You don't have enough coins to play";
+    if (WA.player.state.coins == 0) {
+      noCoinFlip.innerHTML = "You don't have enough coins to play";
       headsButton.disabled = true;
       tailsButton.disabled = true;
     } else {
@@ -49,7 +49,7 @@ WA.onInit()
           }
         }, 1500);
       });
-  
+
       tailsButton?.addEventListener("click", () => {
         coinFlipSound.play(coinFlipSoundSetting);
         let answer = coinFlip();
