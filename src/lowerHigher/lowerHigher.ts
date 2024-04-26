@@ -5,6 +5,7 @@ let resultLowerHigher: any = null;
 let higherButton: any = null;
 let lowerButton: any = null;
 
+let noCoin = document.getElementById("no-coin");
 let cardFlip = WA.sound.loadSound("/public/sounds/lowerHigher/card-flip.mp3");
 let cardFlipSoundSetting = {
   volume: 0.5,
@@ -24,43 +25,49 @@ WA.onInit()
     pickCard();
     actualCardDisplayer.src = (WA.state.actualCard as any).img;
 
-    higherButton?.addEventListener("click", () => {
-      cardFlip.play(cardFlipSoundSetting);
-      const actualCard = WA.state.actualCard;
-      pickCard();
-      compareCards(actualCard, WA.state.actualCard, "higher");
-      //   actualCardDisplayer.src = (WA.state.actualCard as any).img;
-      nextCardDisplayer.src = (WA.state.actualCard as any).img;
-
+    if (WA.player.state.coins == 0) {
+      noCoin.innerHTML = "You don't have enough coins to play";
       higherButton.disabled = true;
       lowerButton.disabled = true;
+    } else {
+      higherButton?.addEventListener("click", () => {
+        cardFlip.play(cardFlipSoundSetting);
+        const actualCard = WA.state.actualCard;
+        pickCard();
+        compareCards(actualCard, WA.state.actualCard, "higher");
+        //   actualCardDisplayer.src = (WA.state.actualCard as any).img;
+        nextCardDisplayer.src = (WA.state.actualCard as any).img;
 
-      setTimeout(() => {
-        actualCardDisplayer.src = (WA.state.actualCard as any).img;
-        nextCardDisplayer.src = "/public/images/cards/card-back1.png";
-        higherButton.disabled = false;
-        lowerButton.disabled = false;
-      }, 1000);
-    });
+        higherButton.disabled = true;
+        lowerButton.disabled = true;
 
-    lowerButton?.addEventListener("click", () => {
-      cardFlip.play(cardFlipSoundSetting);
-      const actualCard = WA.state.actualCard;
-      pickCard();
-      compareCards(actualCard, WA.state.actualCard, "lower");
-      //   actualCardDisplayer.src = (WA.state.actualCard as any).img;
-      nextCardDisplayer.src = (WA.state.actualCard as any).img;
+        setTimeout(() => {
+          actualCardDisplayer.src = (WA.state.actualCard as any).img;
+          nextCardDisplayer.src = "/public/images/cards/card-back1.png";
+          higherButton.disabled = false;
+          lowerButton.disabled = false;
+        }, 1000);
+      });
 
-      higherButton.disabled = true;
-      lowerButton.disabled = true;
+      lowerButton?.addEventListener("click", () => {
+        cardFlip.play(cardFlipSoundSetting);
+        const actualCard = WA.state.actualCard;
+        pickCard();
+        compareCards(actualCard, WA.state.actualCard, "lower");
+        //   actualCardDisplayer.src = (WA.state.actualCard as any).img;
+        nextCardDisplayer.src = (WA.state.actualCard as any).img;
 
-      setTimeout(() => {
-        actualCardDisplayer.src = (WA.state.actualCard as any).img;
-        nextCardDisplayer.src = "/public/images/cards/card-back1.png";
-        higherButton.disabled = false;
-        lowerButton.disabled = false;
-      }, 1000);
-    });
+        higherButton.disabled = true;
+        lowerButton.disabled = true;
+
+        setTimeout(() => {
+          actualCardDisplayer.src = (WA.state.actualCard as any).img;
+          nextCardDisplayer.src = "/public/images/cards/card-back1.png";
+          higherButton.disabled = false;
+          lowerButton.disabled = false;
+        }, 1000);
+      });
+    }
   })
   .catch((e) => console.error(e));
 
