@@ -48,18 +48,44 @@ WA.onInit()
       standButton.style.display = "block";
       startButton.style.display = "none";
 
-      standButton?.addEventListener("click", () => {
-        stand();
-        while (WA.player.state.dealerStatus === "playing") {
-          console.log("Dealer draws card");
-          dealerDrawCard();
-        }
-        showDealerCard();
+      standButton?.addEventListener("click", onStandClick);
 
-        findWinners();
-      });
+      hitButton?.addEventListener("click", hit);
 
       //   showDealerCard();
+    }
+
+    const onStandClick = () => {
+      stand();
+      while (WA.player.state.dealerStatus === "playing") {
+        console.log("Dealer draws card");
+        dealerDrawCard();
+      }
+      showDealerCard();
+
+      findWinners();
+    };
+
+    function hit() {
+      (WA.player.state.userCards as any[]).push(pickCard21());
+      showUserCard();
+      calculateScores();
+      showUserScore();
+      if ((WA.player.state.userCardScore as number) > 21) {
+        statusDisplayer.innerHTML = "You lose!";
+
+        startButton.style.display = "block";
+        hitButton.style.display = "none";
+        hitButton.removeEventListener("click", hit);
+        standButton.style.display = "none";
+        standButton.removeEventListener("click", onStandClick);
+
+        WA.player.state.status = "finished";
+      }
+
+      if (DealerShoulDrawCard()) {
+        dealerDrawCard();
+      }
     }
 
     function stand() {
@@ -67,12 +93,34 @@ WA.onInit()
     }
 
     function findWinners() {
+      if (
+        (WA.player.state.userCardScore as number) ===
+        (WA.player.state.dealerCardScore as number)
+      ) {
+        statusDisplayer.innerHTML = "It's a tie!";
+
+        startButton.style.display = "block";
+        hitButton.style.display = "none";
+        standButton.style.display = "none";
+
+        return;
+      }
       if ((WA.player.state.userCardScore as number) > 21) {
-        statusDisplayer.innerHTML = "You lost!";
+        statusDisplayer.innerHTML = "You lose!";
+
+        startButton.style.display = "block";
+        hitButton.style.display = "none";
+        standButton.style.display = "none";
+
         return;
       }
       if ((WA.player.state.dealerCardScore as number) > 21) {
         statusDisplayer.innerHTML = "You won!";
+
+        startButton.style.display = "block";
+        hitButton.style.display = "none";
+        standButton.style.display = "none";
+
         return;
       }
 
@@ -81,6 +129,11 @@ WA.onInit()
         (WA.player.state.dealerCardScore as number)
       ) {
         statusDisplayer.innerHTML = "You won!";
+
+        startButton.style.display = "block";
+        hitButton.style.display = "none";
+        standButton.style.display = "none";
+
         return;
       }
 
@@ -96,6 +149,11 @@ WA.onInit()
         ) {
           if (!dealerHasAs()) {
             statusDisplayer.innerHTML = "You won!";
+
+            startButton.style.display = "block";
+            hitButton.style.display = "none";
+            standButton.style.display = "none";
+
             return;
           }
 
@@ -106,10 +164,20 @@ WA.onInit()
             (WA.player.state.userCardScore as number) + 10 < 21
           ) {
             statusDisplayer.innerHTML = "You won!";
+
+            startButton.style.display = "block";
+            hitButton.style.display = "none";
+            standButton.style.display = "none";
+
             return;
           }
         }
-        statusDisplayer.innerHTML = "You lost!";
+        statusDisplayer.innerHTML = "You lose!";
+
+        startButton.style.display = "block";
+        hitButton.style.display = "none";
+        standButton.style.display = "none";
+
         return;
       }
     }
@@ -118,7 +186,7 @@ WA.onInit()
       if (DealerShoulDrawCard()) {
         (WA.player.state.dealerCards as any[]).push(pickCard21());
         let newCard = document.createElement("img");
-        newCard.src = "public/images/cards/card-back.png";
+        newCard.src = "/public/images/cards/card-back1.png";
         newCard.style.width = "40px";
         newCard.style.height = "56px";
         newCard.style.transform =
