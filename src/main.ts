@@ -246,7 +246,7 @@ WA.onInit()
           horizontal: "middle",
         },
         size: {
-          height: "60vh",
+          height: "70vh",
           width: "50vh",
         },
         margin: {
