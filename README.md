@@ -1,23 +1,35 @@
-# WorkAdventure Map Starter Kit
+# CasinoAdventure
 
-![map](./map.png)
+![map](./CasinoAdventure.png)
 
-This is a starter kit to help you build your own map for [WorkAdventure](https://workadventu.re).
+This repository contains our Casino project for WorkAdventure.
 
-To understand how to use this starter kit, follow the tutorial at [https://workadventu.re/map-building](https://workadventu.re/map-building).
+## FEATURES
 
-## Structure
-* *public*: Static files like PDFs or audio files
-* *src*: Scripts files
-* *tilesets*: All tilesets
-* *map.tmj*: Map file
-* *map.png*: The map thumbnail displayed on the in-game map information
+- Casino Hub : Ilyam, Aurelien, Robin
+- Coins chase (search and find coins across the map) : Ilyam
+- Coin Flip game : Aurelien
+- Higher or Lower game : Aurelien
+- Slot Machines : Ilyam, Aurelien
+- 21 ( Black Jack ) : Aurelien
+- Roulette Game : Robin
+- Bar (buy drinks to increase your luck) : Aurelien
+- Maps (hub and roulette) : Ilyam, Robin
+- SFX : Ilyam
 
-If you want to use more than one map file, just add the new map file on root or in a folder.
+## Developers
 
-we recommend using 500x500 images for the map thumbnails.
+- DUPUIS Ilyam : Insane-Bob
+- PRUDHOMME Aurelien : Prumme
+- FAUCHERY Robin : Robiinf
 
-If you are going to create custom websites to embed in the map, please reference the HTML files in the `input` option in *vite.config.js*.
+## Design 
+
+- WANG Lucie
+
+## Marketing
+
+- LAMATIERE Nicolas
 
 ## Requirements
 
@@ -27,17 +39,10 @@ Node.js version >=17
 
 With npm installed (comes with [node](https://nodejs.org/en/)), run the following commands into a terminal in the root directory of this project:
 
+Clone the repository and run the following commands : 
 ```shell
 npm install
 npm run dev
-```
-
-## Test production map
-
-You can test the optimized map as it will be in production:
-```sh
-npm run build
-npm run prod
 ```
 
 ## Licenses
