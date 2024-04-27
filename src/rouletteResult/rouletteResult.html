@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="title" content="My inventory" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Roulette result</title>
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    <!-- Font Persona 2P -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <script src="rouletteResult.ts" type="module"></script>
+  </head>
+  <body>
+    <main>
+      <div
+        id="bg2change"
+        class="flex p-5 rounded-lg m-3 justify-center bg-opacity-75 bg-cover bg-center bg-no-repeat"
+      >
+        <div
+          class="flex text-white font-semibold items-center flex-col gap-10 my-28"
+        >
+          <h2 id="roulette_roll"></h2>
+          <h2 id="result_desc"></h2>
+          <h1 id="result" class="text-6xl"></h1>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  * {
+    font-family: "Press Start 2P", cursive;
+  }
+</style>

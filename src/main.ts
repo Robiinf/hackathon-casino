@@ -3,6 +3,7 @@
 import { UIWebsite } from "@workadventure/iframe-api-typings";
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 import { initCoins } from "./coins/coins";
+import { initRoulette } from "./RouletteGame";
 
 console.log("Script started successfully");
 
@@ -26,6 +27,7 @@ let coinflip: any = null;
 WA.onInit()
   .then(() => {
     initCoins();
+    initRoulette();
     console.log("Scripting API ready");
     console.log("Player tags: ", WA.player.tags);
 
@@ -54,20 +56,6 @@ WA.onInit()
       },
       margin: {
         right: "12px",
-      },
-      allowApi: true,
-    });
-
-    // Inventory
-    WA.ui.website.open({
-      url: "./src/hud/inventory.html",
-      position: {
-        vertical: "top",
-        horizontal: "right",
-      },
-      size: {
-        height: "70px",
-        width: "150px",
       },
       allowApi: true,
     });
@@ -271,21 +259,31 @@ WA.onInit()
       });
     });
 
+    // Init the coin counter of the player
+    WA.player.state.coins = 50;
+
+    WA.ui.website.open({
+      url: "./src/hud/inventory.html",
+      position: {
+        vertical: "top",
+        horizontal: "right",
+      },
+      size: {
+        height: "30vh",
+        width: "150px",
+      },
+      allowApi: true,
+    });
+
+    WA.room.area.onEnter("roulette-1").subscribe(() => {
+      WA.nav.goToRoom("./roulette.tmj#start");
+    });
+
     bootstrapExtra()
       .then(() => {
         console.log("Scripting API  Extra ready");
       })
       .catch((e) => console.error(e));
-  })
-  .catch((e) => console.error(e));
-
-// Init the coin counter of the player
-// WA.player.state.coins = 50;
-
-// The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
-bootstrapExtra()
-  .then(() => {
-    console.log("Scripting API Extra ready");
   })
   .catch((e) => console.error(e));
 
