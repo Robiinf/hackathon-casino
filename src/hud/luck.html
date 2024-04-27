@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="title" content="My inventory" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>My inventory</title>
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    <!-- Font Persona 2P -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="luck.ts" type="module"></script>
+  </head>
+  <body>
+    <div
+      class="flex flex-col items-center justify-center bg-[#1b1b29f2] rounded-lg h-[80vh] w-10"
+    >
+      <img
+        id="luck-logo"
+        src="/public/images/trefle4.png"
+        class="w-6 h-6 mb-4"
+      />
+      <div
+        class="w-4 bg-slate-100 outline-[#3EA055] outline bg-white h-4/5 overflow-hidden flex flex-col justify-end rounded-full"
+      >
+        <div
+          class="relative w-4 bg-[#3EA055] overflow-hidden"
+          id="luck-count"
+        ></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  * {
+    font-family: "Press Start 2P", cursive;
+  }
+
+  #luck-count {
+    transition: height 0.5s;
+    height: 0;
+  }
+
+  #luck-count:before,
+  #luck-count:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    background: black;
+    transform: translate(-50%, -75%);
+  }
+
+  #luck-count:before {
+    border-radius: 45%;
+    background: rgba(255, 255, 255, 1);
+    animation: animate 5s linear infinite;
+  }
+  
+  #luck-count:after {
+    border-radius: 40%;
+    background: rgba(255, 255, 255, 0.5);
+    animation: animate 10s linear infinite;
+  }
+
+  @keyframes animate {
+    0% {
+      transform: translate(-50%, -75%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -75%) rotate(360deg);
+    }
+  }
+</style>

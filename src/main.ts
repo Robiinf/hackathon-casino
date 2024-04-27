@@ -1,50 +1,198 @@
 /// <reference types="@workadventure/iframe-api-typings" />
 
+import { UIWebsite } from "@workadventure/iframe-api-typings";
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
 import { initCoins } from "./coins/coins";
-import { compareCards, pickCard, initHigherLowerGame } from "./SimpleCard";
 import { initRoulette } from "./RouletteGame";
 
 console.log("Script started successfully");
+
+function openSlots() {
+  WA.ui.website.open({
+    url: "./src/slots/slots.html",
+    position: {
+      horizontal: "middle",
+      vertical: "middle",
+    },
+    size: {
+      height: "80vh",
+      width: "80vh",
+    },
+    allowApi: true,
+  });
+}
 
 let coinflip: any = null;
 // Waiting for the API to be ready
 WA.onInit()
   .then(() => {
-    initHigherLowerGame();
     initCoins();
     // -> put it in a condition on area enter roulette -> change the map and init the roulette
     initRoulette();
     console.log("Scripting API ready");
     console.log("Player tags: ", WA.player.tags);
 
-    WA.room.area.onEnter("clock").subscribe(async () => {
-      //   Pick a random card
+    WA.player.state.dealerCards = [];
+    WA.player.state.dealerCardScore = 0;
 
-      // coinflip = await WA.ui.website.open({
-      //   url: "./src/coinflip/coinflip.html",
-      //   position: {
-      //     vertical: "top",
-      //     horizontal: "middle",
-      //   },
-      //   size: {
-      //     height: "44vh",
-      //     width: "50vw",
-      //   },
-      //   margin: {
-      //     top: "12vh",
-      //   },
-      //   allowApi: true,
-      // });
+    WA.state.remainCard = [];
+    WA.state.actualCard = null;
 
+    // Init the coin counter of the player
+    WA.player.state.coins = 10;
+    WA.player.state.luck = 0;
+
+    WA.player.state.drinksConsumed = [];
+
+    // Luck Bar
+    WA.ui.website.open({
+      url: "./src/hud/luck.html",
+      position: {
+        vertical: "middle",
+        horizontal: "right",
+      },
+      size: {
+        height: "80vh",
+        width: "40px",
+      },
+      margin: {
+        right: "12px",
+      },
+      allowApi: true,
+    });
+
+    // Inventory
+    WA.ui.website.open({
+      url: "./src/hud/inventory.html",
+      position: {
+        vertical: "top",
+        horizontal: "right",
+      },
+      size: {
+        height: "70px",
+        width: "150px",
+      },
+      allowApi: true,
+    });
+
+    // Slots Machine
+    let cashMachine: UIWebsite | undefined;
+    WA.room.area.onEnter("slot-1").subscribe(async () => {
+      cashMachine = await WA.ui.website.open({
+        url: "./src/cashMachine/cashMachine.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "80vh",
+          width: "80vh",
+        },
+        margin: {
+          top: "12vh",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("slot-1").subscribe(async () => {
+        await cashMachine?.close();
+      });
+    });
+
+    WA.room.area.onEnter("slot-2").subscribe(async () => {
+      cashMachine = await WA.ui.website.open({
+        url: "./src/cashMachine/cashMachine.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "80vh",
+          width: "80vh",
+        },
+        margin: {
+          top: "12vh",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("slot-2").subscribe(async () => {
+        await cashMachine?.close();
+      });
+    });
+
+    WA.room.area.onEnter("slot-3").subscribe(async () => {
+      cashMachine = await WA.ui.website.open({
+        url: "./src/cashMachine/cashMachine.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "80vh",
+          width: "80vh",
+        },
+        margin: {
+          top: "12vh",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("slot-3").subscribe(async () => {
+        await cashMachine?.close();
+      });
+    });
+
+    WA.room.area.onEnter("slot-4").subscribe(async () => {
+      cashMachine = await WA.ui.website.open({
+        url: "./src/cashMachine/cashMachine.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "80vh",
+          width: "80vh",
+        },
+        margin: {
+          top: "12vh",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("slot-4").subscribe(async () => {
+        await cashMachine?.close();
+      });
+    });
+
+    WA.room.area.onEnter("slot-5").subscribe(async () => {
+      cashMachine = await WA.ui.website.open({
+        url: "./src/cashMachine/cashMachine.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "80vh",
+          width: "80vh",
+        },
+        margin: {
+          top: "12vh",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("slot-5").subscribe(async () => {
+        await cashMachine?.close();
+      });
+    });
+
+    // Coinflip Game
+    let coinflip: UIWebsite | undefined;
+    WA.room.area.onEnter("coinflip").subscribe(async () => {
       coinflip = await WA.ui.website.open({
-        url: "./src/lowerHigher/lowerHigher.html",
+        url: "./src/coinflip/coinflip.html",
         position: {
           vertical: "top",
           horizontal: "middle",
         },
         size: {
-          height: "44vh",
+          height: "60vh",
           width: "50vw",
         },
         margin: {
@@ -52,34 +200,78 @@ WA.onInit()
         },
         allowApi: true,
       });
-
-      // pickCard();
-
-      // WA.chat.sendChatMessage(
-      //   "Will the next card be higher or lower?",
-      //   "Dealer"
-      // );
+      WA.room.area.onLeave("coinflip").subscribe(async () => {
+        await coinflip?.close();
+      });
     });
 
-    //  Listen to chat messages to get the user answer
-    WA.chat.onChatMessage((message) => {
-      if (message !== "higher" && message !== "lower") {
-        WA.chat.sendChatMessage("Please enter higher or lower", "Dealer");
-        return;
-      }
-
-      const actualValue = WA.state.actualCard as any;
-
-      pickCard();
-
-      const nextValue = WA.state.actualCard as any;
-
-      compareCards(actualValue, nextValue, message);
+    // Lower Higher Game
+    let lowerHigher: UIWebsite | undefined;
+    WA.room.area.onEnter("lowerHigher").subscribe(async () => {
+      lowerHigher = await WA.ui.website.open({
+        url: "./src/lowerHigher/lowerHigher.html",
+        position: {
+          vertical: "top",
+          horizontal: "middle",
+        },
+        size: {
+          height: "60vh",
+          width: "50vw",
+        },
+        margin: {
+          top: "12vh",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("lowerHigher").subscribe(async () => {
+        await lowerHigher?.close();
+      });
     });
 
-    WA.room.area.onLeave("clock").subscribe(async () => {
-      WA.chat.close();
-      await coinflip.close();
+    // Blackjack
+    let blackjack: UIWebsite | undefined;
+    WA.room.area.onEnter("blackjack").subscribe(async () => {
+      blackjack = await WA.ui.website.open({
+        url: "./src/twentyOne/twentyOne.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "80vh",
+          width: "50vh",
+        },
+        margin: {
+          right: "12px",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("blackjack").subscribe(async () => {
+        await blackjack?.close();
+      });
+    });
+
+    // Bar
+    let bar: UIWebsite | undefined;
+    WA.room.area.onEnter("bar").subscribe(async () => {
+      bar = await WA.ui.website.open({
+        url: "./src/bar/bar.html",
+        position: {
+          vertical: "middle",
+          horizontal: "middle",
+        },
+        size: {
+          height: "60vh",
+          width: "50vh",
+        },
+        margin: {
+          right: "12px",
+        },
+        allowApi: true,
+      });
+      WA.room.area.onLeave("bar").subscribe(async () => {
+        await bar?.close();
+      });
     });
 
     // Init the coin counter of the player

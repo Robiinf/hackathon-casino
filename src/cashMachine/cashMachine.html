@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lower Or Higher Game</title>
+    <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="cashMachine.ts"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="flex bg-[#1b1b29f2] text-white flex flex-col justify-center items-center gap-y-5 p-4">
+        <h1 class="text-lg text-center">Welcome to the Slot Machine! <span class="italic text-green-500">(5 coins per spin)</span></h1>
+        <span id="no-coin" class="italic text-red-500 text-sm pb-1"></span>
+        <span id="balance" class="italic text-red-500 text-sm pb-1"></span>
+        <div class="slots">
+            <div class="relative flex w-96 h-96">
+                <img src="/public/images/cashMachine/slot-machine.png"/>
+                <img id="lever-up" class="absolute bottom-1" src="/public/images/cashMachine/lever-up.png"/>
+                <img id="lever-down" class="absolute bottom-0 hidden" src="/public/images/cashMachine/lever-down.png"/>
+                <div class="absolute reel top-[150px] left-[109px] w-[50px] h-[132px] overflow-hidden gap-y-3"></div>
+                <div class="absolute reel top-[150px] left-[169.5px] w-[50px] h-[132px]"></div> 
+                <div class="absolute reel top-[150px] left-[230px] w-[50px] h-[132px]"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<style>
+    * {
+        font-family: 'Press Start 2P', cursive;
+    }
+    .reel {
+        background-image: url('/public/images/cashMachine/slot-background.png');
+        background-repeat: repeat-y;
+        background-size: 100%;
+        background-position: 0 30px;    
+    }
+</style>

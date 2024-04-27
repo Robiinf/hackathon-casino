@@ -6,7 +6,7 @@
     <title>Lower Or Higher Game</title>
     <script src="https://play.staging.workadventu.re/iframe_api.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="lowerHigher.ts"></script>
+    <script defer src="lowerHigher.ts"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
     <div class="bg-[#1b1b29f2] text-white flex flex-col justify-center items-center gap-y-2 p-4">
         <h1 class="text-2xl text-center">Lower or Higher</h1>
         <p class="text-small">Is the next card will be higher or lower??</p>
+        <p id="no-coin" class="italic text-red-500  text-sm pb-1"></p>
         <div class="h-40 bg-[#5e885f] gap-x-8 flex p-2 ">
             <div class=" h-full border-[#3c573d] border-2 rounded-md p-1  flex justify-center" >
                 <img class="duration-100" id="actual-card-displayer" src="/public/images/cards/card-clubs-1.png">
