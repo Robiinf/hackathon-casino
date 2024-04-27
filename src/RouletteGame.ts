@@ -42,7 +42,10 @@ async function startBidingTimer() {
   });
 
   const interval = setInterval(() => {
-    WA.state.saveVariable("bet_timer", WA.state.loadVariable("bet_timer") - 1);
+    WA.state.saveVariable(
+      "bet_timer",
+      (WA.state.loadVariable("bet_timer") as number) - 1
+    );
     if (WA.state.loadVariable("bet_timer") === 0) {
       clearInterval(interval);
     }
@@ -166,13 +169,19 @@ export function initRoulette() {
   WA.player.state.saveVariable("betAmount", 1);
   console.log("Roulette game initialized");
   WA.room.area.onEnter("roulette-area").subscribe(() => {
-    WA.state.saveVariable("players", WA.state.loadVariable("players") + 1);
-    if (WA.state.loadVariable("players") > 0) {
+    WA.state.saveVariable(
+      "players",
+      (WA.state.loadVariable("players") as number) + 1
+    );
+    if ((WA.state.loadVariable("players") as number) > 0) {
       startBidingTimer();
     }
   });
   WA.room.area.onLeave("roulette-area").subscribe(() => {
-    WA.state.saveVariable("players", WA.state.loadVariable("players") - 1);
+    WA.state.saveVariable(
+      "players",
+      (WA.state.loadVariable("players") as number) - 1
+    );
   });
   WA.state.onVariableChange("bet_timer").subscribe((value) => {
     if (value == 0) {
