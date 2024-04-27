@@ -27,7 +27,6 @@ let coinflip: any = null;
 WA.onInit()
   .then(() => {
     initCoins();
-    // -> put it in a condition on area enter roulette -> change the map and init the roulette
     initRoulette();
     console.log("Scripting API ready");
     console.log("Player tags: ", WA.player.tags);
@@ -57,20 +56,6 @@ WA.onInit()
       },
       margin: {
         right: "12px",
-      },
-      allowApi: true,
-    });
-
-    // Inventory
-    WA.ui.website.open({
-      url: "./src/hud/inventory.html",
-      position: {
-        vertical: "top",
-        horizontal: "right",
-      },
-      size: {
-        height: "70px",
-        width: "150px",
       },
       allowApi: true,
     });
@@ -288,6 +273,10 @@ WA.onInit()
         width: "150px",
       },
       allowApi: true,
+    });
+
+    WA.room.area.onEnter("roulette-1").subscribe(() => {
+      WA.nav.goToRoom("./roulette.tmj#start");
     });
 
     bootstrapExtra()

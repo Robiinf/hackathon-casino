@@ -149,9 +149,22 @@ async function startRoulette() {
   WA.nav.goToRoom("#start");
 }
 
+WA.ui.website.open({
+  url: "./src/lastRolls/lastRolls.html",
+  position: {
+    vertical: "top",
+    horizontal: "left",
+  },
+  size: {
+    height: "40vh",
+    width: "250px",
+  },
+  allowApi: true,
+});
+
 export function initRoulette() {
   WA.player.state.saveVariable("betAmount", 1);
-
+  console.log("Roulette game initialized");
   WA.room.area.onEnter("roulette-area").subscribe(() => {
     WA.state.saveVariable("players", WA.state.loadVariable("players") + 1);
     if (WA.state.loadVariable("players") > 0) {
@@ -170,17 +183,8 @@ export function initRoulette() {
     }
   });
 
-  WA.ui.website.open({
-    url: "./src/lastRolls/lastRolls.html",
-    position: {
-      vertical: "top",
-      horizontal: "left",
-    },
-    size: {
-      height: "40vh",
-      width: "250px",
-    },
-    allowApi: true,
+  WA.room.area.onEnter("exitRoulette").subscribe(() => {
+    WA.nav.goToRoom("./map.tmj");
   });
 
   WA.room.area.onEnter("0").subscribe(() => {
