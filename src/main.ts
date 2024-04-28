@@ -2,8 +2,8 @@
 
 import { UIWebsite } from "@workadventure/iframe-api-typings";
 import { bootstrapExtra } from "@workadventure/scripting-api-extra";
-import { initCoins } from "./coins/coins";
 import { initRoulette } from "./RouletteGame";
+import { initCoins } from "./coins/coins";
 
 console.log("Script started successfully");
 
@@ -246,8 +246,8 @@ WA.onInit()
           horizontal: "middle",
         },
         size: {
-          height: "70vh",
-          width: "50vh",
+          height: "80vh",
+          width: "100vh",
         },
         margin: {
           right: "12px",
@@ -287,4 +287,5 @@ WA.onInit()
   })
   .catch((e) => console.error(e));
 
-export {};
+export { };
+

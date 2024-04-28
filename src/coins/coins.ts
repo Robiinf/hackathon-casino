@@ -4,14 +4,6 @@ export function initCoins() {
         volume: 0.5,
         loop: false,
     };
-
-    // Hiding coins 0
-    WA.room.area.onEnter('coin').subscribe(() => {
-        coinSound.play(soundConfig);
-        (WA.player.state.coins as number) += 5;
-        WA.room.area.delete('coin');
-        WA.room.hideLayer('floor/coin-0');
-    });
     // Hiding coins 1
     WA.room.area.onEnter('coin-1').subscribe(() => {
         coinSound.play(soundConfig);
@@ -32,19 +24,5 @@ export function initCoins() {
        (WA.player.state.coins as number) += 50;
         WA.room.area.delete('coin-3');
         WA.room.hideLayer('floor/coin-3');
-    });
-    // Hiding coins 4
-    WA.room.area.onEnter('coin-4').subscribe(() => {
-        coinSound.play(soundConfig);
-       (WA.player.state.coins as number) += 10;
-        WA.room.area.delete('coin-4');
-        WA.room.hideLayer('floor/coin-4');
-    });
-    // Hiding coins 5
-    WA.room.area.onEnter('coin-5').subscribe(() => {
-        coinSound.play(soundConfig);
-       (WA.player.state.coins as number) += 10;
-        WA.room.area.delete('coin-5');
-        WA.room.hideLayer('floor/coin-5');
     });
 }

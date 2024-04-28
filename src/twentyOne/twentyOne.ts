@@ -9,7 +9,9 @@ let score: any = null;
 let dealerScore: any = null;
 let statusDisplayer: any = null;
 
-let shuffleCard = WA.sound.loadSound("/public/sounds/blackjack/blackjack-shuffle.mp3");
+let shuffleCard = WA.sound.loadSound(
+  "/public/sounds/blackjack/blackjack-shuffle.mp3"
+);
 let cardFlip = WA.sound.loadSound("/public/sounds/lowerHigher/card-flip.mp3");
 let staySound = WA.sound.loadSound("/public/sounds/blackjack/check-sound.mp3");
 
@@ -85,7 +87,7 @@ WA.onInit()
       showUserScore();
       if ((WA.player.state.userCardScore as number) > 21) {
         statusDisplayer.innerHTML = "You lose!";
-
+        WA.player.state.coins -= 10;
         startButton.style.display = "block";
         hitButton.style.display = "none";
         hitButton.removeEventListener("click", hit);
@@ -119,7 +121,7 @@ WA.onInit()
       }
       if ((WA.player.state.userCardScore as number) > 21) {
         statusDisplayer.innerHTML = "You lose!";
-
+        WA.player.state.coins -= 10;
         startButton.style.display = "block";
         hitButton.style.display = "none";
         standButton.style.display = "none";
@@ -128,7 +130,7 @@ WA.onInit()
       }
       if ((WA.player.state.dealerCardScore as number) > 21) {
         statusDisplayer.innerHTML = "You won!";
-
+        WA.player.state.coins += 10;
         startButton.style.display = "block";
         hitButton.style.display = "none";
         standButton.style.display = "none";
@@ -141,7 +143,7 @@ WA.onInit()
         (WA.player.state.dealerCardScore as number)
       ) {
         statusDisplayer.innerHTML = "You won!";
-
+        WA.player.state.coins += 10;
         startButton.style.display = "block";
         hitButton.style.display = "none";
         standButton.style.display = "none";
@@ -161,7 +163,7 @@ WA.onInit()
         ) {
           if (!dealerHasAs()) {
             statusDisplayer.innerHTML = "You won!";
-
+            WA.player.state.coins += 10;
             startButton.style.display = "block";
             hitButton.style.display = "none";
             standButton.style.display = "none";
@@ -176,6 +178,7 @@ WA.onInit()
             (WA.player.state.userCardScore as number) + 10 < 21
           ) {
             statusDisplayer.innerHTML = "You won!";
+            WA.player.state.coins += 10;
 
             startButton.style.display = "block";
             hitButton.style.display = "none";
